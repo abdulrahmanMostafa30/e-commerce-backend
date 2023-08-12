@@ -140,16 +140,16 @@ const swaggerOptions = {
 
 const swaggerSpecification = swaggerJsDoc(swaggerOptions, { explorer: true });
 const app = express();
-app.enable('trust proxy');
+// app.enable('trust proxy');
 app.use(cookieParser());
 app.use(cors());
-app.use(helmet.hidePoweredBy());
+// app.use(helmet.hidePoweredBy());
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000,
   max: 100,
 });
-app.use(hpp());
-app.use(xXssProtection());
+// app.use(hpp());
+// app.use(xXssProtection());
 app.disable("x-powered-by");
 // app.use(favicon(path.join(__dirname, 'favicon.ico')))
 app.use(useragent.express());
@@ -167,7 +167,7 @@ app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecification));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(limiter);
+// app.use(limiter);
 app.use("/api", apiRoutes);
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
