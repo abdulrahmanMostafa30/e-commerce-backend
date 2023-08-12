@@ -98,8 +98,8 @@ const authenticate = async (email, password) => {
     return null;
   }
 };
-const admin = new AdminJS(adminJsOptions);
 
+const admin = new AdminJS(adminJsOptions);
 const adminRouter = AdminJSExpress.buildAuthenticatedRouter(admin, {
   authenticate,
   cookieName: "adminjs",
@@ -140,6 +140,7 @@ const swaggerOptions = {
 
 const swaggerSpecification = swaggerJsDoc(swaggerOptions, { explorer: true });
 const app = express();
+app.enable('trust proxy');
 app.use(cookieParser());
 app.use(cors());
 app.use(helmet.hidePoweredBy());
