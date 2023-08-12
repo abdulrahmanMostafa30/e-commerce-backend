@@ -148,7 +148,6 @@ const limiter = rateLimit({
   max: 100,
 });
 app.use(hpp());
-app.use(limiter);
 app.use(xXssProtection());
 app.disable("x-powered-by");
 // app.use(favicon(path.join(__dirname, 'favicon.ico')))
@@ -163,11 +162,12 @@ if (process.env.NODE_ENV === "development") {
 app.use(xss());
 app.use(compression());
 app.use(admin.options.rootPath, adminRouter);
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use("/api", apiRoutes);
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecification));
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(limiter);
+app.use("/api", apiRoutes);
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
