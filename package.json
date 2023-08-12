@@ -29,6 +29,7 @@
     "morgan-json": "^1.1.0",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.4",
+    "nodemon": "^3.0.1",
     "serve-favicon": "^2.5.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
@@ -39,7 +40,7 @@
     "xss-clean": "^0.1.4"
   },
   "scripts": {
-    "start": "nodemon --no-warnings --experimental-modules --es-module-specifier-resolution=node server.js",
+    "start": "node --no-warnings --experimental-modules --es-module-specifier-resolution=node server.js",
     "build": "npm install"
   },
   "engines": {
